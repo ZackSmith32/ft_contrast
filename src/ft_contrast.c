@@ -6,9 +6,13 @@
 /*   By: zsmith <zsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/09 09:56:53 by zsmith            #+#    #+#             */
-/*   Updated: 2017/04/09 10:11:08 by zsmith           ###   ########.fr       */
+/*   Updated: 2017/04/09 10:14:32 by zsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "stdlib.h"
 
+int		main(int ac, char **av)
+{
+	return (0);
+}
