@@ -6,17 +6,12 @@
 /*   By: gselbo <gselbo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/09 09:56:53 by zsmith            #+#    #+#             */
-/*   Updated: 2017/04/09 15:11:21 by gselbo           ###   ########.fr       */
+/*   Updated: 2017/04/09 15:13:57 by gselbo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "stdlib.h"
 #include "../includes/contrast.h"
-
-// int			read_set_header(char *line, struct t_contrast data)
-// {
-// 	data.max_val = ft_atoi(line);
-// }
 
 int			calc_out(char **split, struct t_contrast *data)
 {
@@ -63,7 +58,7 @@ int			ft_contrast(struct t_contrast *data)
 	return (0);
 }
 
-int			main(int ac, char **av)
+int			set_up(int ac, char **av)
 {
 	int		input_fd;
 	int		output_fd;
@@ -79,6 +74,12 @@ int			main(int ac, char **av)
 	data.contrast_level = ft_atoi(av[4]);
 	ft_contrast(&data);
 	printf("data.max = %d\n", data.max_val);
+	return (0);
+}
+
+int			main(int ac, char **av)
+{
+	set_up(ac, av);
 	return (0);
 }
 
