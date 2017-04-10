@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_contrast.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gselbo <gselbo@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zsmith <zsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/09 09:56:53 by zsmith            #+#    #+#             */
-/*   Updated: 2017/04/09 15:13:57 by gselbo           ###   ########.fr       */
+/*   Updated: 2017/04/09 21:37:28 by zsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,20 +41,12 @@ int			ft_contrast(struct t_contrast *data)
 	i = 0;
 	while (get_next_line(data->input_fd, &line) > 0)
 	{
-		printf("%s\n", line);
 		if (i == 2)
-		{
-			printf("line: %s|\n", line);
 			data->max_val = atoi(line);
-			printf("data.max: %d\n", data->max_val);
-		}
 		else if (i > 2)
 			calc_out(ft_strsplit(line, ' '), data);
-		printf("\n");
 		i++;
 	}
-	close(data->input_fd);
-	close(data->output_fd);
 	return (0);
 }
 
@@ -64,21 +56,22 @@ int			set_up(int ac, char **av)
 	int		output_fd;
 	struct	t_contrast data;
 	
-	if (ac != 7)
-	{
-		ft_puterror("bad input\n");
-		return (0);
-	}
 	data.input_fd = open(av[2], O_RDONLY);
 	data.output_fd = open(av[6], O_CREAT | O_RDWR, 0777);
 	data.contrast_level = ft_atoi(av[4]);
 	ft_contrast(&data);
-	printf("data.max = %d\n", data.max_val);
+	close(data->input_fd);
+	close(data->output_fd);
 	return (0);
 }
 
 int			main(int ac, char **av)
 {
+	if (ac != 7)
+	{
+		ft_puterror("bad input\n");
+		return (0);
+	}
 	set_up(ac, av);
 	return (0);
 }
