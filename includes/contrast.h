@@ -6,7 +6,7 @@
 /*   By: zsmith <zsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/09 12:29:21 by gselbo            #+#    #+#             */
-/*   Updated: 2017/04/09 23:09:33 by zsmith           ###   ########.fr       */
+/*   Updated: 2017/04/09 23:29:04 by zsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 #include <pthread.h>
 #include "libft.h"
 
-#define NUM_THREADS	100
-#define	BUFF_SIZE_T 100000
+#define NUM_THREADS	1000
+#define	BUFF_SIZE_T 1000000
 
 struct 		t_contrast
 {

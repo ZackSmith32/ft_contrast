@@ -6,15 +6,16 @@
 /*   By: zsmith <zsmith@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/09 09:56:53 by zsmith            #+#    #+#             */
-/*   Updated: 2017/04/09 23:14:07 by zsmith           ###   ########.fr       */
+/*   Updated: 2017/04/09 23:30:15 by zsmith           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/contrast.h"
 
-int			calc_out(void *arg)
+void			*calc_out(void *arg)
 {
 	int 			i;
+	int				j;
 	unsigned short	new_val;
 	char			**split;
 	int				thread_number;
@@ -29,6 +30,7 @@ int			calc_out(void *arg)
 		if (str[i] >= 48 && str[i] <= 57)
 		{
 			new_val = (unsigned short)((ft_atoi(&str[i]) * g_contrast_level) / 100);
+
 			i++;
 			if (str[i] == ' ')
 				i++;
@@ -40,14 +42,14 @@ int			calc_out(void *arg)
 		// ft_putstr_fd(" ", file_data->output_fd);
 	}
 	// ft_putstr_fd("\n", file_data->output_fd);
-	return (0);
+	return (NULL);
 }
 
 int			ft_contrast(struct t_contrast *file_data)
 {
 	char	*line;
 	int		proc_count;
-	unsigned char		i;
+	long		i;
 	int		rc;
 	int		ret;
 	pthread_t thread[NUM_THREADS];
@@ -55,10 +57,10 @@ int			ft_contrast(struct t_contrast *file_data)
 
 	pthread_attr_init(&attr);
 	i = 0;
-	while (ret = read(file_data->input_fd, g_chunks[i], BUFF_SIZE_T))
+	while ((ret = read(file_data->input_fd, g_chunks[i], BUFF_SIZE_T)))
 	{
 		g_chunks[i][BUFF_SIZE_T] = '\0';
-		printf("ft_contrast: creating thread %d, ret = %d, fd = %d\n", i, ret, file_data->input_fd);
+		printf("ft_contrast: creating thread %ld, ret = %d, fd = %d\n", i, ret, file_data->input_fd);
 		rc = pthread_create(&thread[i], &attr, &calc_out, (void *)i);
 		if (rc) 
 		{
@@ -83,7 +85,7 @@ int			main(int ac, char **av)
 		return (0);
 	}
 	i = 0;
-	while (i < 100)
+	while (i < NUM_THREADS)
 	{
 		g_chunks[i] = (char *)ft_memalloc(BUFF_SIZE_T);
 		i++;
